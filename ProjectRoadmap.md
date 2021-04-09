@@ -8,9 +8,14 @@ I would like to write a program that trains people how to calculate the simple e
 - [ ] Update Readme file
 
 ## Sprint 2
-
+- [ ] 1
+- [ ] 2
+- [ ] 3
+- [ ] 4
 
 ## Sprint 3
 
-- [ ] Finalize all styling
-- [ ] Final QA testing
+- [ ] 1
+- [ ] 2
+- [ ] 3
+- [ ] 4
