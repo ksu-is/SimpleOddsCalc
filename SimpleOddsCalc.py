@@ -2,7 +2,7 @@ def build_deck():
     # Create the starting deck
     deck = []
     # Numbered Cards
-    for value in range(9):
+    for value in range(8):
         for suit in range(4):
             if suit == 0:
                 deck.append(str(value + 2) + 'S')
@@ -14,15 +14,17 @@ def build_deck():
                 deck.append(str(value + 2) + 'D')
  
     # Named Cards
-    for value in range(4):
+    for value in range(5):
         named_cards = ''
         if value == 0:
-            named_cards = 'J'
+            named_cards = 'T'
         elif value == 1:
-            named_cards = 'Q'
+            named_cards = 'J'
         elif value == 2:
-            named_cards = 'K'
+            named_cards = 'Q'
         elif value == 3:
+            named_cards = 'K'
+        elif value == 4:
             named_cards = 'A'
         for suit in range(4):
             if suit == 0:
@@ -74,9 +76,9 @@ def board_state():
         else:
             print("\nPlease enter the flop cards in the correct format.\n")
             flop_input = input("Please enter the board state (2s 3s...): ").upper()
-    for card in range(len(flop_cards)):
-        flop_cards[card] = letter_to_value(flop_cards[card])
-    flop_cards.sort()
+    # for card in range(len(flop_cards)):
+        # flop_cards[card] = letter_to_value(flop_cards[card])
+    # flop_cards.sort()
     return flop_cards
 
 # calculate the odds of improving players hand to the target hand. If the opposing player is all-in on the turn, then use the 4 rule, otherwise use the 2 rule
@@ -116,7 +118,19 @@ def straight_check(visible_cards):
     value_list = []
     # get the values to look for
     for card in visible_cards:
-        value_list.append(int(card[0]))
+        if card[0] == 'A':
+            value_list.append(1)
+        elif card[0] == 'T':
+            value_list.append(10)
+        elif card[0] == 'J':
+            value_list.append(11)
+        elif card[0] == 'Q':
+            value_list.append(12)
+        elif card[0] == 'K':
+            value_list.append(13)
+        else:
+            value_list.append(int(card[0]))
+        value_list.sort()
     # check to see if there is an open ended draw and return the two values
     # we want to run the loop twice for the flop and three times for the turn
     # 5-3=2 and 6-3=3
@@ -124,11 +138,25 @@ def straight_check(visible_cards):
     # value is +3
     for card in range((len(visible_cards) - 3)):
         if value_list[card] == value_list[card + 3] - 3\
-             and value_list[card] == value_list[card + 1] - 1:
+             and value_list[card] == value_list[card + 1] - 1\
+             and value_list[card] == value_list[card + 2] - 2:
             outs_list.append(value_list[card] - 1)
-            outs_list.append(value_list[card + 3] + 1)
+            if (value_list[card + 3] + 1) == 14:
+                outs_list.append(1)
+            else:
+                outs_list.append(value_list[card + 3] + 1)
+            for value in range(len(outs_list)):
+                if outs_list[value] == 1:
+                    outs_list[value] = 'A'
+                elif outs_list[value] == 10:
+                    outs_list[value] = 'T'
+                elif outs_list[value] == 11:
+                    outs_list[value] = 'J'
+                elif outs_list[value] == 12:
+                    outs_list[value] = 'Q'
+                elif outs_list[value] == 13:
+                    outs_list[value] = 'K'
             return outs_list
-            break
     # Checking for gutshot
     # because we know the user is looking for a straight and the
     # list is ordered, we can look for the first consecutive
@@ -136,16 +164,26 @@ def straight_check(visible_cards):
     for card in range(len(visible_cards) - 1):
         if value_list[card] == value_list[card + 1] - 1:
             outs_list.append(value_list[card + 1] + 1)
+            for value in range(len(outs_list)):
+                if outs_list[value] == 1:
+                    outs_list[value] = 'A'
+                elif outs_list[value] == 10:
+                    outs_list[value] = 'T'
+                elif outs_list[value] == 11:
+                    outs_list[value] = 'J'
+                elif outs_list[value] == 12:
+                    outs_list[value] = 'Q'
+                elif outs_list[value] == 13:
+                    outs_list[value] = 'K'
             return outs_list
-            break
 
 # test_list = ['2h', '4h', '6h', '6h', '7h']
 # print(straight_check(test_list))
 
-hole_cards = hole_cards()
-board = board_state()
-print(outs_calc(hole_cards, board, 'STRAIGHT'))
+# hole_cards = hole_cards()
+# board = board_state()
+# print(outs_calc(hole_cards, board, 'STRAIGHT'))
 
-# print(outs_calc(['2H', '3H'], ['4H', '5H', '7H'], 'STRAIGHT'))
+print(outs_calc(['TH', 'JH'], ['QH', 'KS', '9H'], 'STRAIGHT'))
 
 
