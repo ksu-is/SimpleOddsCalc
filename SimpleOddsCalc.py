@@ -37,19 +37,6 @@ def build_deck():
                 deck.append(named_cards + 'D')
     return deck
 
-
-# For named cards (eg Ace or A), change to numerical value
-def letter_to_value(card):
-    if card[0] == 'A':
-        card = str(1) #+ card[1]
-    elif card[0] == 'K':
-        card = str(13) #+ card[1]
-    elif card[0] == 'Q':
-        card = str(12) #+ card[1]
-    elif card[0] == 'J':
-        card = str(11) #+ card[1]
-    return card
-
 # function to get the users hole cards
 def hole_cards():
     user_hand = []
@@ -101,16 +88,24 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
             deck.remove(card)
         # calculate via the seen cards method and return
         return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
-
-    """ if target_hand == 'FLUSH':
+    elif target_hand == 'FLUSH':
+        suit = flush_check(all_cards)
+        for card in all_cards:
+            deck.remove(card)
+        for card in deck:
+            if suit == card[1]:
+                num_of_outs += 1
+        return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
+    """
+    elif target_hand == 'FULL HOUSE':
     
-    if target_hand == 'FULL HOUSE':
-    
-    if target_hand == 'QUADS':
+    elif target_hand == 'QUADS':
 
-    if target_hand == 'STRAIGHT FLUSH':
+    elif target_hand == 'STRAIGHT FLUSH':
 
-    if target_hand == 'STRAIGHT OR FLUSH':
+    elif target_hand == 'STRAIGHT OR FLUSH':
+
+    elif target_hand == 'PAIR/TRIPS/TWO PAIR':
     """
 
 def straight_check(visible_cards):
@@ -177,13 +172,38 @@ def straight_check(visible_cards):
                     outs_list[value] = 'K'
             return outs_list
 
+def flush_check(visible_cards):
+    # a list with the count of each suit
+    suits_list = []
+    # join the list so we can count the number of suits and 
+    # append them to the suits_list
+    list_join = "".join(visible_cards)
+    suits_list.append(list_join.count('S'))
+    suits_list.append(list_join.count('H'))
+    suits_list.append(list_join.count('C'))
+    suits_list.append(list_join.count('D'))
+    # find the index of the highest number of suits
+    max_value = max(suits_list)
+    max_index = suits_list.index(max_value)
+    # return the character of the highest num of suits
+    if max_index == 0:
+        return 'S'
+    elif max_index == 1:
+        return 'H'
+    elif max_index == 2:
+        return 'C'
+    elif max_index == 3:
+        return 'D'
+    
+
+# print(flush_check(['2H', '4D', '6C', '6S', '7H']))
 # test_list = ['2h', '4h', '6h', '6h', '7h']
 # print(straight_check(test_list))
 
-# hole_cards = hole_cards()
-# board = board_state()
-# print(outs_calc(hole_cards, board, 'STRAIGHT'))
+hole_cards = hole_cards()
+board = board_state()
+print(outs_calc(hole_cards, board, 'FLUSH'))
 
-print(outs_calc(['TH', 'JH'], ['QH', 'KS', '9H'], 'STRAIGHT'))
+# print(outs_calc(['TH', 'JH'], ['QH', 'KS', '9H'], 'FLUSH'))
 
 
