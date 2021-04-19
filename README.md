@@ -1,5 +1,5 @@
-# SimpleOddsCalc
-=================
+SimpleOddsCalc
+======================
 
 Program to teach how to do simple odds for Texas Hold-em.
 
@@ -7,8 +7,19 @@ I would like to write a program that trains people how to calculate the simple e
 
 As the project is completed, a write up of how the program functions will be put here.
 
-Testing the User
+Background
 -----------------
+Equity is an important concept in Texas Holdem. It is the percentage of times you will win a hand with a given hand and board state. This is one of many concepts that the best players use at the table to make decisions.
+
+While a Monte Carlo simulation is significantly better in telling us what the odds are and the equity of any given hand, doing 100,000 simulations in our head at the table is not feasible. We can, however, approximate the odds using a few methods.
+
+The "Seen Cards" Method
+-----------------
+One of the better ways to do quick math at the table is to determine your outs, and divide that by the remaining cards in the deck. For example, if you see your two cards and the 3 card flop, you would divide your outs by the remaining 47 cards.
+
+There are some limitations, though. What if your opponent(s) have one of your outs? What if someone folded one of your outs? What if one of your outs improves your hand but gives your opponent a better hand?
+
+This program is not meant to factor in every single situation at the table. Because those decisions are entirely subjective, this program focuses on the math. Use this program as a way to learn how to do the math at the table quickly.
 
 User Entry for Odds
 -----------------
