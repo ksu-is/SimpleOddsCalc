@@ -21,6 +21,10 @@ There are some limitations, though. What if your opponent(s) have one of your ou
 
 This program is not meant to factor in every single situation at the table. Because those decisions are entirely subjective, this program focuses on the math. Use this program as a way to learn how to do the math at the table quickly.
 
+The "4 and 2" Method
+-----------------
+- If time allows, this may be added
+
 User Entry for Odds
 -----------------
 
