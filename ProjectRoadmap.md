@@ -14,13 +14,20 @@
 - [x] Update Readme file
 
 ## Sprint 2
-- [ ] Get basic layout completed
-    - [ ] Either a flowchart or narrative
+- [x] Get basic layout completed
+    - [x] Either a flowchart or narrative
 - [ ] Build the basic analysis and computation functions
     - [ ] How hands will be evaluated and what will be returned
     - [ ] Use the standard hand name conventions (pair, trips, full house, etc.)
-- [ ] Flowchart/narrative for randomized boards and hands to test user
-    - [ ] Should only be for post-flop and the turn
+    - [x] Straight
+    - [x] Flush
+    - [ ] Full House
+    - [ ] Pair a hole card
+    - [ ] Straight Flush
+    - [ ] Quads
+- [ ] ~~Flowchart/narrative for randomized boards and hands to test user~~
+    - [ ] ~~Should only be for post-flop and the turn~~
+    - Rational for removing this part of the program is in the ReadMe
 - [ ] Get a layout for how the board and flop/turn will be dispayed in the terminal
     - [ ] layout how results will be displayed
 
