@@ -68,6 +68,30 @@ def board_state():
     # flop_cards.sort()
     return flop_cards
 
+def target_hand():
+    while True:
+        user_selection = input("Enter the target hand:\n1 : STRAIGHT\n2 : FLUSH\n"
+        + "3 : FULL HOUSE\n4 : STRAIGHT OR FLUSH\n5 : STRAIGHT FLUSH\n6 : QUADS\n"
+        + "7 : PAIR ANY\n: ")
+        if user_selection == '1':
+            return 'STRAIGHT'
+        elif user_selection == '2':
+            return 'FLUSH'
+        elif user_selection == '3':
+            return 'FULL HOUSE'
+        elif user_selection == '4':
+            return 'STRAIGHT OR FLUSH'
+        elif user_selection == '5':
+            return 'STRAIGHT FLUSH'
+        elif user_selection == '6':
+            return 'QUADS'
+        elif user_selection == '7':
+            return 'FLUSH'
+        else:
+            print('Try Again\n')
+
+print(target_hand()) 
+
 # calculate the odds of improving players hand to the target hand. If the opposing player is all-in on the turn, then use the 4 rule, otherwise use the 2 rule
 def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
     deck = build_deck()
@@ -88,6 +112,7 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
             deck.remove(card)
         # calculate via the seen cards method and return
         return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
+
     elif target_hand == 'FLUSH':
         suit = flush_check(all_cards)
         for card in all_cards:
@@ -97,22 +122,69 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
                 num_of_outs += 1
         return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
-
     elif target_hand == 'FULL HOUSE':
         num_of_outs = full_house_check(all_cards)
         # remove the card seen from the deck
         for card in all_cards:
             deck.remove(card)
         return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
-    """  
-    elif target_hand == 'QUADS':
-
-    elif target_hand == 'STRAIGHT FLUSH':
 
     elif target_hand == 'STRAIGHT OR FLUSH':
+        straight_outs = straight_check(all_cards)
+        suit = flush_check(all_cards)
+        outs = []
+        # count the number of outs
+        for out in straight_outs:
+            for card in deck:
+                if str(out) == card[0]:
+                    outs.append(card)
+        for card in deck:
+            if suit == card[1]\
+                 and card not in outs\
+                 and card not in all_cards:
+                outs.append(card)
+        for card in all_cards:
+            deck.remove(card)
+        num_of_outs = len(outs)
+        print(outs)
+        return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
-    elif target_hand == 'PAIR/TRIPS/TWO PAIR':
-    """
+    elif target_hand == 'STRAIGHT FLUSH':
+        straight_outs = straight_check(all_cards)
+        suit = flush_check(all_cards)
+        outs = []
+        for out in straight_outs:
+            for card in deck:
+                if str(out) == card[0]\
+                    and card[1] == suit:
+                    outs.append(card)
+        for card in all_cards:
+            deck.remove(card)
+        num_of_outs = len(outs)
+        return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
+
+    elif target_hand == 'QUADS':
+        values = ""
+        for card in all_cards:
+            values += card[0]
+        for value in values:
+            if values.count(value) == 3:
+                for card in all_cards:
+                    deck.remove(card)
+                num_of_outs = 1
+                return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
+    
+    elif target_hand == 'PAIR ANY':
+        values = ""
+        for card in all_cards:
+            values += card[0]
+        for card in deck:
+            if card[0] in values and card not in all_cards:
+                num_of_outs += 1
+        for card in all_cards:
+                    deck.remove(card)
+        return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
+
 
 def straight_check(visible_cards):
     outs_list = []
@@ -220,7 +292,8 @@ def full_house_check(visible_cards):
 
 hole_cards = hole_cards()
 board = board_state()
-print(outs_calc(hole_cards, board, 'FULL HOUSE'))
+target_hand = input()
+print(outs_calc(hole_cards, board, target_hand))
 
 # print(outs_calc(['TH', 'JH'], ['QH', 'KS', '9H'], 'FLUSH'))
 

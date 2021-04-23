@@ -22,9 +22,12 @@
     - [x] Straight
     - [x] Flush
     - [x] Full House
-    - [ ] Pair a hole card
-    - [ ] Straight Flush
-    - [ ] Quads
+    - [X] Pair any card
+    - [x] Straight Flush
+    - [x] Quads
+    - [ ] Ask the user if they are facing an all in bet
+        - [ ] Add code to analysis to do the math. Should be different if they are facing a all in bet (meaning they won't just see the next card, they will see the next two cards)
+    - [x] build function to get the target hand from the user
 - [ ] ~~Flowchart/narrative for randomized boards and hands to test user~~
     - [ ] ~~Should only be for post-flop and the turn~~
     - Rational for removing this part of the program is in the ReadMe
