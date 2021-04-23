@@ -18,10 +18,10 @@
     - [x] Either a flowchart or narrative
 - [ ] Build the basic analysis and computation functions
     - [ ] How hands will be evaluated and what will be returned
-    - [ ] Use the standard hand name conventions (pair, trips, full house, etc.)
+    - [x] Use the standard hand name conventions (pair, trips, full house, etc.)
     - [x] Straight
     - [x] Flush
-    - [ ] Full House
+    - [x] Full House
     - [ ] Pair a hole card
     - [ ] Straight Flush
     - [ ] Quads
@@ -29,6 +29,7 @@
     - [ ] ~~Should only be for post-flop and the turn~~
     - Rational for removing this part of the program is in the ReadMe
 - [ ] Get a layout for how the board and flop/turn will be dispayed in the terminal
+    - [ ] Restructure how the inputs are made by the user
     - [ ] layout how results will be displayed
 
 ## Sprint 3

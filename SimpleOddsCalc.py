@@ -96,9 +96,15 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
             if suit == card[1]:
                 num_of_outs += 1
         return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
-    """
+
+
     elif target_hand == 'FULL HOUSE':
-    
+        num_of_outs = full_house_check(all_cards)
+        # remove the card seen from the deck
+        for card in all_cards:
+            deck.remove(card)
+        return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
+    """  
     elif target_hand == 'QUADS':
 
     elif target_hand == 'STRAIGHT FLUSH':
@@ -111,6 +117,7 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
 def straight_check(visible_cards):
     outs_list = []
     value_list = []
+    num_of_outs = 0
     # get the values to look for
     for card in visible_cards:
         if card[0] == 'A':
@@ -194,7 +201,18 @@ def flush_check(visible_cards):
         return 'C'
     elif max_index == 3:
         return 'D'
+
+def full_house_check(visible_cards):
+    values = ""
+    for card in visible_cards:
+        values += card[0]
+    for value in values:
+        if values.count(value) == 2:
+            return 4
+        elif values.count(value) == 3:
+            return 9
     
+# print(full_house_check(['2H', '6D', '6C', '6S', '7H']))
 
 # print(flush_check(['2H', '4D', '6C', '6S', '7H']))
 # test_list = ['2h', '4h', '6h', '6h', '7h']
@@ -202,7 +220,7 @@ def flush_check(visible_cards):
 
 hole_cards = hole_cards()
 board = board_state()
-print(outs_calc(hole_cards, board, 'FLUSH'))
+print(outs_calc(hole_cards, board, 'FULL HOUSE'))
 
 # print(outs_calc(['TH', 'JH'], ['QH', 'KS', '9H'], 'FLUSH'))
 
