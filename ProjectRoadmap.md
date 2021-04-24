@@ -31,13 +31,14 @@
 - [ ] ~~Flowchart/narrative for randomized boards and hands to test user~~
     - [ ] ~~Should only be for post-flop and the turn~~
     - Rational for removing this part of the program is in the ReadMe
-- [ ] Get a layout for how the board and flop/turn will be dispayed in the terminal
-    - [ ] Restructure how the inputs are made by the user
-    - [ ] layout how results will be displayed
+- [x] Get a layout for how the board and flop/turn will be dispayed in the terminal
+    - [x] layout how results will be displayed
 
 ## Sprint 3
 
-- [ ] 1
-- [ ] 2
-- [ ] 3
-- [ ] 4
+- [ ] If there is enough time, add the 4 and 2 method
+- [ ] Explain the program a little better in the readme
+- [ ] Restructure how the inputs are made by the user
+- [ ] Review program to identify improvements
+- [ ] Use roommate as free labor to test the program
+- [ ] Get powerpoint slide prepared

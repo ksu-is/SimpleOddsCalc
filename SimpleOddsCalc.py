@@ -46,7 +46,7 @@ def hole_cards():
             #user_card = letter_to_value(user_card)
             user_hand.append(user_card)
         else:
-            user_card = input("Enter the second hole card: ").upper()
+            user_card = input("\nEnter the second hole card: ").upper()
             #user_card = letter_to_value(user_card)
             user_hand.append(user_card)
     return user_hand
@@ -61,7 +61,7 @@ def board_state():
         elif len(flop_input) == 11:
             flop_cards = flop_input.split()
         else:
-            print("\nPlease enter the flop cards in the correct format.\n")
+            print("\nPlease enter the board cards in the correct format.\n")
             flop_input = input("Please enter the board state (2s 3s...): ").upper()
     # for card in range(len(flop_cards)):
         # flop_cards[card] = letter_to_value(flop_cards[card])
@@ -88,9 +88,7 @@ def target_hand():
         elif user_selection == '7':
             return 'FLUSH'
         else:
-            print('Try Again\n')
-
-print(target_hand()) 
+            print('Try Again\n') 
 
 # calculate the odds of improving players hand to the target hand. If the opposing player is all-in on the turn, then use the 4 rule, otherwise use the 2 rule
 def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
@@ -146,7 +144,6 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
         for card in all_cards:
             deck.remove(card)
         num_of_outs = len(outs)
-        print(outs)
         return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
     elif target_hand == 'STRAIGHT FLUSH':
@@ -193,6 +190,7 @@ def straight_check(visible_cards):
     # get the values to look for
     for card in visible_cards:
         if card[0] == 'A':
+            value_list.append(14)
             value_list.append(1)
         elif card[0] == 'T':
             value_list.append(10)
@@ -284,17 +282,15 @@ def full_house_check(visible_cards):
         elif values.count(value) == 3:
             return 9
     
-# print(full_house_check(['2H', '6D', '6C', '6S', '7H']))
-
-# print(flush_check(['2H', '4D', '6C', '6S', '7H']))
-# test_list = ['2h', '4h', '6h', '6h', '7h']
-# print(straight_check(test_list))
-
 hole_cards = hole_cards()
+print()
 board = board_state()
-target_hand = input()
-print(outs_calc(hole_cards, board, target_hand))
+print()
+target_hand = target_hand()
+odds = outs_calc(hole_cards, board, target_hand)
+print("\nThe odds that the next card will improve your had to the target hand,",
+ "\n-", target_hand,"-", "\nis", odds)
 
-# print(outs_calc(['TH', 'JH'], ['QH', 'KS', '9H'], 'FLUSH'))
+
 
 
