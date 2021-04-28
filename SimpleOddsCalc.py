@@ -291,6 +291,19 @@ odds = outs_calc(hole_cards, board, target_hand)
 print("\nThe odds that the next card will improve your had to the target hand,",
  "\n-", target_hand,"-", "\nis", odds)
 
-
-
-
+while True:
+    another_hand = input("Would you like to see another hand? (y/n): ")
+    if another_hand.startswith('y'):
+        hole_cards = hole_cards()
+        print()
+        board = board_state()
+        print()
+        target_hand = target_hand()
+        odds = outs_calc(hole_cards, board, target_hand)
+        print("\nThe odds that the next card will improve your had to the target hand,",
+        "\n-", target_hand,"-", "\nis", odds)
+    elif another_hand.startswith('n'):
+        print("Good Luck!")
+        break
+    else:
+        print("Sorry, seems like you are indecisive...")

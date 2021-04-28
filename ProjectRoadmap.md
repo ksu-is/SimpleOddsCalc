@@ -17,7 +17,7 @@
 - [x] Get basic layout completed
     - [x] Either a flowchart or narrative
 - [ ] Build the basic analysis and computation functions
-    - [ ] How hands will be evaluated and what will be returned
+    - [x] How hands will be evaluated and what will be returned
     - [x] Use the standard hand name conventions (pair, trips, full house, etc.)
     - [x] Straight
     - [x] Flush
