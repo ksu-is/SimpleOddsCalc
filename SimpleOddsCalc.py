@@ -1,3 +1,5 @@
+import time
+
 def build_deck():
     # Create the starting deck
     deck = []
@@ -40,32 +42,54 @@ def build_deck():
 # function to get the users hole cards
 def hole_cards():
     user_hand = []
+    deck = build_deck()
     while len(user_hand) < 2:
-        if len(user_hand) < 1:
+        while len(user_hand) < 1:
             user_card = input("Enter the first hole card: ").upper()
-            #user_card = letter_to_value(user_card)
-            user_hand.append(user_card)
-        else:
+            if user_card in deck:
+                deck.remove(user_card)
+                user_hand.append(user_card)
+            else:
+                print("\nEntered card has already been selected, or is not a card. Try Again.\n")
+                time.sleep(0.5)
+        while len(user_hand) < 2:
             user_card = input("\nEnter the second hole card: ").upper()
-            #user_card = letter_to_value(user_card)
-            user_hand.append(user_card)
+            if user_card in deck:
+                user_hand.append(user_card)
+            else:
+                print("\nEntered card has already been selected, or is not a card. Try Again.\n")
+                time.sleep(0.5)
     return user_hand
 
 # function to get the board state
-def board_state():
+def board_state(hole_cards):
     flop_cards= []
-    flop_input = input("Please enter the board state (2s 3s...): ").upper()
-    while len(flop_cards) < 2:
-        if len(flop_input) == 8:
-            flop_cards = flop_input.split()
-        elif len(flop_input) == 11:
-            flop_cards = flop_input.split()
+    deck = build_deck()
+    round_state = input("Are we at the flop or the turn? (\"Flop\" or \"Turn\"): ").upper()
+    while True:
+        if round_state.startswith("F"):
+            print("Enter the three Flop cards")
+            while len(flop_cards) < 3:
+                user_card = input("\nCard " + str(len(flop_cards) + 1) + ": ").upper()
+                if user_card in deck and user_card not in hole_cards:
+                    flop_cards.append(user_card)
+                else:
+                    print("\nEntered card has already been selected, or is not a card. Try Again.\n")
+                    time.sleep(0.5)
+            break
+        elif round_state.startswith("T"):
+            print("Enter the three Flop cards and the Turn card")
+            while len(flop_cards) < 4:
+                user_card = input("\nCard " + str(len(flop_cards) + 1) + ": ").upper()
+                if user_card in deck and user_card not in hole_cards:
+                    flop_cards.append(user_card)
+                else:
+                    print("\nEntered card has already been selected, or is not a card. Try Again.\n")
+                    time.sleep(0.5)
+            break
         else:
-            print("\nPlease enter the board cards in the correct format.\n")
-            flop_input = input("Please enter the board state (2s 3s...): ").upper()
-    # for card in range(len(flop_cards)):
-        # flop_cards[card] = letter_to_value(flop_cards[card])
-    # flop_cards.sort()
+            print("\nThat is not an accepted input.\n")
+            time.sleep(0.5)
     return flop_cards
 
 def target_hand():
@@ -88,7 +112,8 @@ def target_hand():
         elif user_selection == '7':
             return 'FLUSH'
         else:
-            print('Try Again\n') 
+            print('Try Again\n')
+            time.sleep(0.5)
 
 # calculate the odds of improving players hand to the target hand. If the opposing player is all-in on the turn, then use the 4 rule, otherwise use the 2 rule
 def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
@@ -96,7 +121,7 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
     all_cards = hole_cards + board_cards
     all_cards.sort()
     num_of_outs = 0
-    
+
     if target_hand == 'STRAIGHT':
         # Get the values for the outs
         straight_outs = straight_check(all_cards)
@@ -284,15 +309,19 @@ def full_house_check(visible_cards):
     
 hole_cards = hole_cards()
 print()
-board = board_state()
+time.sleep(0.5)
+board = board_state(hole_cards)
 print()
+time.sleep(0.5)
 target_hand = target_hand()
+print()
+time.sleep(0.5)
 odds = outs_calc(hole_cards, board, target_hand)
 print("\nThe odds that the next card will improve your had to the target hand,",
  "\n-", target_hand,"-", "\nis", odds)
 
 while True:
-    another_hand = input("Would you like to see another hand? (y/n): ")
+    another_hand = input("\nWould you like to see another hand? (y/n): ")
     if another_hand.startswith('y'):
         hole_cards = hole_cards()
         print()
@@ -301,9 +330,9 @@ while True:
         target_hand = target_hand()
         odds = outs_calc(hole_cards, board, target_hand)
         print("\nThe odds that the next card will improve your had to the target hand,",
-        "\n-", target_hand,"-", "\nis", odds)
+        "\n-", target_hand,"-", ", is", odds)
     elif another_hand.startswith('n'):
-        print("Good Luck!")
+        print("\nGood Luck!")
         break
     else:
         print("Sorry, seems like you are indecisive...")
