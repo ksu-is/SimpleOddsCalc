@@ -16,7 +16,7 @@
 ## Sprint 2
 - [x] Get basic layout completed
     - [x] Either a flowchart or narrative
-- [ ] Build the basic analysis and computation functions
+- [x] Build the basic analysis and computation functions
     - [x] How hands will be evaluated and what will be returned
     - [x] Use the standard hand name conventions (pair, trips, full house, etc.)
     - [x] Straight
@@ -25,8 +25,8 @@
     - [X] Pair any card
     - [x] Straight Flush
     - [x] Quads
-    - [ ] Ask the user if they are facing an all in bet
-        - [ ] Add code to analysis to do the math. Should be different if they are facing a all in bet (meaning they won't just see the next card, they will see the next two cards)
+    - [x] Ask the user if they are facing an all in bet
+        - [x] Add code to analysis to do the math. Should be different if they are facing a all in bet (meaning they won't just see the next card, they will see the next two cards)
     - [x] build function to get the target hand from the user
 - [ ] ~~Flowchart/narrative for randomized boards and hands to test user~~
     - [ ] ~~Should only be for post-flop and the turn~~
@@ -38,7 +38,8 @@
 
 - [ ] If there is enough time, add the 4 and 2 method
 - [ ] Explain the program a little better in the readme
-- [ ] Restructure how the inputs are made by the user
+- [x] Restructure how the inputs are made by the user
 - [ ] Review program to identify improvements
 - [ ] Use roommate as free labor to test the program
 - [ ] Get powerpoint slide prepared
+- [ ] Set up time to present project
