@@ -70,9 +70,9 @@ def board_state(hole_cards):
     while True:
         round_state = input("Are we at the flop or the turn? (\"Flop\" or \"Turn\"): ").upper()
         if round_state.startswith("F"):
-            print("Enter the three Flop cards")
+            print("\nEnter the three Flop cards")
             while len(flop_cards) < 3:
-                user_card = input("\nCard " + str(len(flop_cards) + 1) + ": ").upper()
+                user_card = input("Card " + str(len(flop_cards) + 1) + ": ").upper()
                 if user_card in deck and user_card not in hole_cards:
                     flop_cards.append(user_card)
                 else:
@@ -80,9 +80,9 @@ def board_state(hole_cards):
                     time.sleep(0.5)
             break
         elif round_state.startswith("T"):
-            print("Enter the three Flop cards and the Turn card")
+            print("\nEnter the three Flop cards and the Turn card")
             while len(flop_cards) < 4:
-                user_card = input("\nCard " + str(len(flop_cards) + 1) + ": ").upper()
+                user_card = input("Card " + str(len(flop_cards) + 1) + ": ").upper()
                 if user_card in deck and user_card not in hole_cards:
                     flop_cards.append(user_card)
                 else:
@@ -115,16 +115,15 @@ def target_hand():
             return 'FLUSH'
         else:
             print('Try Again\n')
-            time.sleep(0.5)
 
 # calculate the odds of improving players hand to the target hand. If the opposing player is all-in on the turn, then use the 4 rule, otherwise use the 2 rule
-def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
+def outs_calc(hole_cards, board_cards, user_target, all_in_bet = False):
     deck = build_deck()
     all_cards = hole_cards + board_cards
     all_cards.sort()
     num_of_outs = 0
 
-    if target_hand == 'STRAIGHT':
+    if user_target == 'STRAIGHT':
         # Get the values for the outs
         straight_outs = straight_check(all_cards)
         # count the number of outs
@@ -135,26 +134,22 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
         # remove the card seen from the deck
         for card in all_cards:
             deck.remove(card)
-        # calculate via the seen cards method and return
-        # return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
-    elif target_hand == 'FLUSH':
+    elif user_target == 'FLUSH':
         suit = flush_check(all_cards)
         for card in all_cards:
             deck.remove(card)
         for card in deck:
             if suit == card[1]:
                 num_of_outs += 1
-        # return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
-    elif target_hand == 'FULL HOUSE':
+    elif user_target == 'FULL HOUSE':
         num_of_outs = full_house_check(all_cards)
         # remove the card seen from the deck
         for card in all_cards:
             deck.remove(card)
-        # return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
-    elif target_hand == 'STRAIGHT OR FLUSH':
+    elif user_target == 'STRAIGHT OR FLUSH':
         straight_outs = straight_check(all_cards)
         suit = flush_check(all_cards)
         outs = []
@@ -171,9 +166,8 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
         for card in all_cards:
             deck.remove(card)
         num_of_outs = len(outs)
-        # return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
-    elif target_hand == 'STRAIGHT FLUSH':
+    elif user_target == 'STRAIGHT FLUSH':
         straight_outs = straight_check(all_cards)
         suit = flush_check(all_cards)
         outs = []
@@ -185,9 +179,8 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
         for card in all_cards:
             deck.remove(card)
         num_of_outs = len(outs)
-        # return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
-    elif target_hand == 'QUADS':
+    elif user_target == 'QUADS':
         values = ""
         for card in all_cards:
             values += card[0]
@@ -196,9 +189,8 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
                 for card in all_cards:
                     deck.remove(card)
                 num_of_outs = 1
-                # return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
     
-    elif target_hand == 'PAIR ANY':
+    elif user_target == 'PAIR ANY':
         values = ""
         for card in all_cards:
             values += card[0]
@@ -207,7 +199,6 @@ def outs_calc(hole_cards, board_cards, target_hand, all_in_bet = False):
                 num_of_outs += 1
         for card in all_cards:
                     deck.remove(card)
-        # return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
 
     if all_in_bet == False:
         return (str(round(num_of_outs/len(deck)*100, 2)) + '%')
@@ -318,39 +309,52 @@ def full_house_check(visible_cards):
         elif values.count(value) == 3:
             return 9
 
-all_in_check = False
-    
-hole_cards_list = hole_cards()
-print()
-time.sleep(0.5)
-board = board_state(hole_cards_list)
-print()
-time.sleep(0.5)
-target_hand = target_hand()
-print()
-time.sleep(0.5)
-opp_all_in = input("Is your opponent all_in?: (y/n): ").upper()
-if opp_all_in.startswith("Y"):
-    all_in_check = True
-odds = outs_calc(hole_cards_list, board, target_hand, all_in_check)
-os.system("cls||clear")
-print("\nThe odds that the next card will improve your had to the target hand,",
- "\n-", target_hand,"-", "is", odds)
+def main():
+    all_in_check = False
+    input("Welcome to a Texas Hold-em odds training program!\n" +
+        "Be sure the read the Readme file first!\nPress 'Enter' to Continue...")
+    os.system("cls||clear")
+    hole_cards_list = hole_cards()
+    print()
+    time.sleep(0.5)
+    board = board_state(hole_cards_list)
+    print()
+    time.sleep(0.5)
+    user_target = target_hand()
+    print()
+    time.sleep(0.5)
+    opp_all_in = input("Is your opponent all_in?: (y/n): ").upper()
+    if opp_all_in.startswith("Y"):
+        all_in_check = True
+    odds = outs_calc(hole_cards_list, board, user_target, all_in_check)
+    os.system("cls||clear")
+    print("\nThe odds that the next card will improve your hand to the target hand,",
+    "\n-", user_target,"-", "is", odds)
 
-while True:
-    another_hand = input("\nWould you like to see another hand? (y/n): ")
-    if another_hand.startswith('y'):
-        os.system("cls||clear")
-        hole_cards = hole_cards()
-        print()
-        board = board_state()
-        print()
-        target_hand = target_hand()
-        odds = outs_calc(hole_cards, board, target_hand)
-        print("\nThe odds that the next card will improve your had to the target hand,",
-        "\n-", target_hand,"-", ", is", odds)
-    elif another_hand.startswith('n'):
-        print("\nGood Luck!")
-        break
-    else:
-        print("Sorry, seems like you are indecisive...")
+    while True:
+        another_hand = input("Would you like to see another hand? (y/n): ")
+        if another_hand.startswith('y'):
+            os.system("cls||clear")
+            hole_cards_list = hole_cards()
+            print()
+            time.sleep(0.5)
+            board = board_state(hole_cards_list)
+            print()
+            time.sleep(0.5)
+            user_target = target_hand()
+            print()
+            time.sleep(0.5)
+            opp_all_in = input("Is your opponent all_in?: (y/n): ").upper()
+            if opp_all_in.startswith("Y"):
+                all_in_check = True
+            odds = outs_calc(hole_cards_list, board, user_target, all_in_check)
+            os.system("cls||clear")
+            print("\nThe odds that the next card will improve your hand to the target hand,",
+                "\n-", user_target,"-", "is", odds)
+        elif another_hand.startswith('n'):
+            print("\nGood Luck!")
+            break
+        else:
+            print("Sorry, seems like you are indecisive...")
+
+main()

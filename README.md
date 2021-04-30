@@ -27,6 +27,17 @@ The "4 and 2" Method
 
 User Entry for Odds
 -----------------
+Each card in a deck has two variables, its value and its suit. For this program, user entry of cards should follow the most commmon short form of each card - Value then Suit. For instance, the Ace of Spaces would be AS.
+
+The program will ask what your two hole cards are and check to see if they are valid entries. Then, the program will ask if you are at the flop stage or at the turn stage. Depending on the input, the porgram will allow the user to enter the number of cards for each board state. Then the program will ask for the target hand the user is going for, and finally if the user if facing an all in bet.
+
+The formula for determining the odds if the user is seeing one more card is:
+
+(Number of outs / number of cards not visible)
+
+For situations where the user is facing an all in bet on the flop, making a call would mean that the user would see both the turn and river card. Therefore, the formula would be:
+
+(Number of outs / number of cards not visible) + (number of outs / (number of cards not visible -1))
 
 Examples of Input and Output
 -----------------

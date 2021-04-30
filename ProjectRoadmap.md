@@ -39,7 +39,7 @@
 - [ ] If there is enough time, add the 4 and 2 method
 - [ ] Explain the program a little better in the readme
 - [x] Restructure how the inputs are made by the user
-- [ ] Review program to identify improvements
-- [ ] Use roommate as free labor to test the program
+- [x] Review program to identify improvements
+- [x] Use roommate as free labor to test the program
 - [ ] Get powerpoint slide prepared
 - [ ] Set up time to present project
