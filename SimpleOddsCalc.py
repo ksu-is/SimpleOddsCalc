@@ -328,13 +328,22 @@ def main():
         all_in_check = True
     odds = outs_calc(hole_cards_list, board, user_target, all_in_check)
     os.system("cls||clear")
-    print("\nThe odds that the next card will improve your hand to the target hand,",
-    "\n-", user_target,"-", "is", odds)
+    print("Your hand is:", hole_cards_list[0], hole_cards_list[1] + ".")
+    print("The board is: ", end = " ")
+    for card in board:
+        print(card, end = " ")
+    if all_in_check == False:
+        print("\nThe odds that the next card will improve your hand to the target hand,",
+            "\n-", user_target,"-", "is", odds)
+    elif all_in_check == True:
+        print("\nThe odds that the remaining cards to come will improve your hand to the target hand,",
+            "\n-", user_target,"-", "is", odds)
 
     while True:
         another_hand = input("Would you like to see another hand? (y/n): ")
         if another_hand.startswith('y'):
-            os.system("cls||clear")
+            os.system('cls||clear')
+            all_in_check = False
             hole_cards_list = hole_cards()
             print()
             time.sleep(0.5)
@@ -349,8 +358,16 @@ def main():
                 all_in_check = True
             odds = outs_calc(hole_cards_list, board, user_target, all_in_check)
             os.system("cls||clear")
-            print("\nThe odds that the next card will improve your hand to the target hand,",
-                "\n-", user_target,"-", "is", odds)
+            print("Your hand is:", hole_cards_list[0], hole_cards_list[1] + ".")
+            print("The board is:", end = " ")
+            for card in board:
+                print(card, end = " ")
+            if all_in_check == False:
+                print("\nThe odds that the next card will improve your hand to the target hand,",
+                    "\n-", user_target,"-", "is", odds)
+            elif all_in_check == True:
+                print("\nThe odds that the remaining cards to come will improve your hand to the target hand,",
+                    "\n-", user_target,"-", "is", odds)
         elif another_hand.startswith('n'):
             print("\nGood Luck!")
             break

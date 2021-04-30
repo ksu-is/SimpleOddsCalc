@@ -28,18 +28,18 @@
     - [x] Ask the user if they are facing an all in bet
         - [x] Add code to analysis to do the math. Should be different if they are facing a all in bet (meaning they won't just see the next card, they will see the next two cards)
     - [x] build function to get the target hand from the user
-- [ ] ~~Flowchart/narrative for randomized boards and hands to test user~~
-    - [ ] ~~Should only be for post-flop and the turn~~
+- ~~[ ] Flowchart/narrative for randomized boards and hands to test user~~
+    - ~~[ ] Should only be for post-flop and the turn~~
     - Rational for removing this part of the program is in the ReadMe
 - [x] Get a layout for how the board and flop/turn will be dispayed in the terminal
     - [x] layout how results will be displayed
 
 ## Sprint 3
 
-- [ ] If there is enough time, add the 4 and 2 method
-- [ ] Explain the program a little better in the readme
+- ~~[ ] If there is enough time, add the 4 and 2 method~~
+- [x] Explain the program a little better in the readme
 - [x] Restructure how the inputs are made by the user
 - [x] Review program to identify improvements
 - [x] Use roommate as free labor to test the program
-- [ ] Get powerpoint slide prepared
+- [ ] Get powerpoint slide prepared and added to repository
 - [ ] Set up time to present project
