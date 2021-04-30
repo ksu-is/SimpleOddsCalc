@@ -21,10 +21,6 @@ There are some limitations, though. What if your opponent(s) have one of your ou
 
 This program is not meant to factor in every single situation at the table. Because those decisions are entirely subjective, this program focuses on the math. Use this program as a way to learn how to do the math at the table quickly.
 
-The "4 and 2" Method
-===
-- If time allows, this may be added
-
 User Entry for Odds
 ===
 Each card in a deck has two variables, its value and its suit. For this program, user entry of cards should follow the most commmon short form of each card - Value then Suit. For instance, the Ace of Spaces would be AS.
