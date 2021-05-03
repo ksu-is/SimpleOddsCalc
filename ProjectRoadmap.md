@@ -42,4 +42,4 @@
 - [x] Review program to identify improvements
 - [x] Use roommate as free labor to test the program
 - [x] Get powerpoint slide prepared and added to repository
-- [ ] Set up time to present project
+- [x] Set up time to present project
